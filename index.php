@@ -1,3 +1,12 @@
+<?php
+
+require_once './controller/VilleController.php';
+
+$villeController = new VilleController();
+$villes = $villeController->afficherVilles();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -96,10 +105,10 @@
                 <div class="row g-4">
                     <?php
 
-                    // foreach ($data as $item) {
-                    //     dispayData($item);
-                    // }
-                    
+                    foreach ($villes as $item) {
+                        dispayData($item);
+                    }
+
                     ?>
 
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">

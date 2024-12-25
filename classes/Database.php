@@ -25,9 +25,3 @@ class Database
 
 }
 
-$conx_DB = new Database();
-if ($conx_DB->connect()) {
-    echo "Connexion réussie à la base de données.";
-} else {
-    echo "La connexion à la base de données a échoué.";
-}

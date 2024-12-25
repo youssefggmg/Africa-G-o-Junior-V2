@@ -1,6 +1,6 @@
 <?php
 
-include './Database.php';
+include_once __DIR__ . './Database.php';
 
 class Ville
 {
@@ -15,7 +15,7 @@ class Ville
 
     public function AfficherVilles()
     {
-        $stmt = $this->db->prepare("SELECT * FROM ville");
+        $stmt = $this->db->prepare("SELECT * FROM ville JOIN pays ON ville.payID = pays.paysId");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
