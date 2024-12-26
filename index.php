@@ -57,6 +57,7 @@ $villes = $villeController->afficherVilles();
                             <div class="navbar-nav py-0" id="navbarCollapseNav">
                                 <a href="/index.php" class="nav-item nav-link active">Villes</a>
                                 <a href="./pages/listPays.php" class="nav-item nav-link active">Pays</a>
+                                <a href="./pages/listPays.php" class="nav-item nav-link active">Continents</a>
                                 <a href="./pages/statistiques.php" class="nav-item nav-link active">statistiques</a>
                             </div>
                         </div>
@@ -115,7 +116,7 @@ $villes = $villeController->afficherVilles();
                         <div class="room-item shadow rounded overflow-hidden ">
 
                             <div class="p-4 mt-2 d-flex justify-content-center">
-                                <a href="./pages/form.php">
+                                <a href="./view/AjouterVilleForm.php">
                                     <button class="btn btn-sm btn-primary rounded py-2 px-4">Ajouter un
                                         Ville</button></a>
                             </div>
