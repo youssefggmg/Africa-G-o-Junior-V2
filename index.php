@@ -67,7 +67,8 @@ $villes = $villeController->afficherVilles();
                     </nav>
                 </div>
                 <div class="col-md-3 d-flex align-items-center justify-content-end">
-                    <a href="/index.php" class="btn btn-primary rounded-lg py-1  px-md-3 d-none d-lg-block">se connecter
+                    <a href="./view/signin.php" class="btn btn-primary rounded-lg py-1  px-md-3 d-none d-lg-block">se
+                        connecter
                         <i class="fa fa-arrow-right ms-3"></i>
                     </a>
                 </div>
