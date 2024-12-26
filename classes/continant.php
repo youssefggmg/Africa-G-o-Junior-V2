@@ -46,13 +46,9 @@ class Auth extends Database
         $this->Nmb_payes = trim($_POST["NB_pays"] ?? '');
         $this->continentImage = trim($_POST["CONimage"] ?? '');
         $this->continentID = trim($_POST["CID"] ?? '');
-
-        // Check if ID is provided
         if (empty($this->continentID)) {
             return ["status" => 0, "error" => "Continent ID is required."];
         }
-
-        // Prepare query dynamically based on provided data
         $query = "UPDATE continent SET ";
         $params = [];
 
@@ -84,6 +80,18 @@ class Auth extends Database
             } else {
                 return ["status" => 0, "error" => "No changes made or invalid ID."];
             }
+        } catch (PDOException $e) {
+            return ["status" => 0, "error" => $e->getMessage()];
+        }
+    }
+    public function deletecountinant(){
+        $this->continentID = $_POST["CID"];
+        $query = "DELETE FROM continent WHERE continent_id = :id";
+        try {
+            $stmt = $this->dbcon->prepare($query);
+            $stmt->execute([
+                "id"=>$this->continentID
+            ]);
         } catch (PDOException $e) {
             return ["status" => 0, "error" => $e->getMessage()];
         }
