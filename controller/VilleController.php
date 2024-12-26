@@ -22,7 +22,8 @@ class VilleController
 
     public function AjouterVille($nom, $vill_descreption, $type, $image, $paysID)
     {
-        return $this->villeModel->AjouterVille($nom, $vill_descreption, $type, $image, $paysID);
+        $result = $this->villeModel->AjouterVille($nom, $vill_descreption, $type, $image, $paysID);
+        return $result;
     }
 }
 
@@ -55,4 +56,12 @@ function dispayData($item)
         </div>
     </div>
 ";
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+
+    $AddVille = new VilleController();
+    $response = $AddVille->AjouterVille($_POST['nom'], $_POST['vill_descreption'], $_POST['type'], $_POST['image'], $_POST['paysID']);
+    var_dump($response);
 }

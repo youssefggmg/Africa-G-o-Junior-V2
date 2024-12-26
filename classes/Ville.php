@@ -22,10 +22,14 @@ class Ville
 
     public function AjouterVille($nom, $vill_descreption, $type, $image, $paysID)
     {
-        $stmt = $this->db->prepare("INSERT INTO ville (name, vill_descreption, type, image, paysID) VALUES (?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssssi", $nom, $vill_descreption, $type, $image, $paysID);
+        $stmt = $this->db->prepare("INSERT INTO ville (name, vill_descreption, type, image, payID) VALUES (:nom, :vill_descreption, :type, :image, :paysID)");
+        $stmt->bindParam(':nom', $nom);
+        $stmt->bindParam(':vill_descreption', $vill_descreption);
+        $stmt->bindParam(':type', $type);
+        $stmt->bindParam(':image', $image);
+        $stmt->bindParam(':paysID', $paysID);
         $stmt->execute();
-        return $stmt->affected_rows;
+        return $stmt->rowCount();
 
     }
 }
