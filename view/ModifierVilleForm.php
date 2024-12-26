@@ -1,9 +1,21 @@
+<?php
+
+require_once '../controller/GetSingleVilleController.php';
+
+$villeController = new GetSingleVilleController();
+$ville = $villeController->getSingleVille($_GET['id']);
+
+// print_r($ville);
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <title>Africa Géo-Junior - Ajouter</title>
+    <title>Africa Géo-Junior - Modifier</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -52,6 +64,7 @@
                             <div class="navbar-nav py-0">
                                 <a href="../index.php" class="nav-item nav-link active">Villes</a>
                                 <a href="./listPays.php" class="nav-item nav-link active">Pays</a>
+                                <a href="./listPays.php" class="nav-item nav-link active">Continent</a>
                                 <a href="./statistiques.php" class="nav-item nav-link active">statistiques</a>
                             </div>
                         </div>
@@ -79,28 +92,38 @@
                         data-wow-delay="0.2s">
                         <div class="row g-3">
                             <div class="col-md-6">
-                                <input type="text" name="nom" class="form-control" placeholder="Nom de la Ville"
-                                    required>
+                                <input type="text" name="nom" value="<?= $ville['name'] ?>" class="form-control"
+                                    placeholder="Nom de la Ville" required>
                             </div>
                             <div class="col-md-6">
                                 <select name="paysID" class="form-select" id="pays">
-                                    <option value="" disabled selected>Pays</option>
-                                    <option value="1">Maroc</option>
+                                    <option value="" disabled>Pays</option>
+                                    <option value="1" selected><?= $ville['paysName'] ?></option>
                                 </select>
                             </div>
                             <div class="col-12">
                                 <select name="type" class="form-select" required>
                                     <option value="" disabled selected>Type</option>
-                                    <option value="othere">Town</option>
-                                    <option value="capital">capital</option>
+                                    <?php if ($ville['type'] == 'capital'): ?>
+                                        <option value="" disabled>Type</option>
+                                        <option value="othere">Town</option>
+                                        <option value="capital" selected>capital</option>
+                                    <?php else: ?>
+                                        <option value="" disabled>Type</option>
+                                        <option value="othere" selected>Town</option>
+                                        <option value="capital">capital</option>
+                                    <?php endif; ?>
+
                                 </select>
                             </div>
                             <div class="col-12">
                                 <textarea name="vill_descreption" class="form-control"
-                                    placeholder="Description de la Ville" style="height: 100px;"></textarea>
+                                    placeholder="Description de la Ville"
+                                    style="height: 100px;"><?= $ville['vill_descreption'] ?></textarea>
                             </div>
                             <div class="col-12">
-                                <input type="text" name="image" class="form-control" placeholder="Url de la Ville">
+                                <input type="text" value="<?= $ville['image'] ?>" name="image" class="form-control"
+                                    placeholder="Url de la Ville">
                             </div>
                             <div class="col-12 text-center">
                                 <button type="submit" class="btn btn-primary rounded py-2 px-5">Ajouter</button>

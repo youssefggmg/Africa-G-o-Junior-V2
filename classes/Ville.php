@@ -40,4 +40,12 @@ class Ville
         $stmt->execute();
         return $stmt->rowCount();
     }
+
+    public function getVilleById($id)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM ville JOIN pays on ville.payID = pays.paysId WHERE villID = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }
