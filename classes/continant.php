@@ -84,14 +84,26 @@ class Auth extends Database
             return ["status" => 0, "error" => $e->getMessage()];
         }
     }
-    public function deletecountinant(){
+    public function deletecountinant()
+    {
         $this->continentID = $_POST["CID"];
         $query = "DELETE FROM continent WHERE continent_id = :id";
         try {
             $stmt = $this->dbcon->prepare($query);
             $stmt->execute([
-                "id"=>$this->continentID
+                "id" => $this->continentID
             ]);
+        } catch (PDOException $e) {
+            return ["status" => 0, "error" => $e->getMessage()];
+        }
+    }
+    public function allcontinent()
+    {
+        try {
+            $query = "SELECT * FROM continent";
+            $stmt = $this->dbcon->query($query);
+            $Result = $stmt->fetchAll();
+            return ["status"=>1,"Result"=>$Result];
         } catch (PDOException $e) {
             return ["status" => 0, "error" => $e->getMessage()];
         }
