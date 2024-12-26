@@ -119,7 +119,7 @@ $pays = $listpaysController->AfficherToutPays();
                                 <div class="mt-2 d-flex justify-content-between">
                                     <p class="mb-0"><i class="fa fa-language text-primary me-2"></i><?= $item['language'] ?>
                                     </p>
-                                    <a href="./deletePays.php?id=<?= $item['paysId'] ?>"
+                                    <a href="../controller/SupprimerPaysController.php?id=<?= $item['paysId'] ?>"
                                         class="btn btn-sm rounded-pill px-3">
                                         <i class="fa fa-trash me-1"></i>
                                     </a>

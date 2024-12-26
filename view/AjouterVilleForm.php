@@ -1,3 +1,12 @@
+<?php
+
+require_once '../controller/ListPaysController.php';
+
+$pays = new ListPaysController();
+$pays = $pays->AfficherToutPays();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -85,7 +94,9 @@
                             <div class="col-md-6">
                                 <select name="paysID" class="form-select" id="pays">
                                     <option value="" disabled selected>Pays</option>
-                                    <option value="1">Maroc</option>
+                                    <?php foreach ($pays as $p): ?>
+                                        <option value="<?= $p['paysId'] ?>"><?= $p['paysName'] ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                             <div class="col-12">

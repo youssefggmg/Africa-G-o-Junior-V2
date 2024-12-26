@@ -29,5 +29,13 @@ class Pays
         $stmt->execute();
         return $stmt->rowCount();
     }
+
+    public function supprimerPays($id)
+    {
+        $stmt = $this->db->prepare("DELETE FROM pays WHERE paysId = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->rowCount();
+    }
 }
 
