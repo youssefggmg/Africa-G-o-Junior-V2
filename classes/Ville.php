@@ -32,4 +32,12 @@ class Ville
         return $stmt->rowCount();
 
     }
+
+    public function supprimerVille($id)
+    {
+        $stmt = $this->db->prepare("DELETE FROM ville WHERE villID = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->rowCount();
+    }
 }

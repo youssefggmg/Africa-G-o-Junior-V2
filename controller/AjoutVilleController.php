@@ -20,6 +20,8 @@ class AjouterVilleController
     }
 }
 
+// logic pour ajouter une ville : instance de la class AjouterVilleController et appel de la methode
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 

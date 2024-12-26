@@ -50,18 +50,10 @@ function dispayData($item)
                 <p class=\"text-body mb-3\">" . $item['paysName'] . "</p>
                 <div class=\"d-flex justify-content-between\">
                     <a class=\"btn btn-sm btn-primary rounded py-2 px-4\" href=\"../pages/updateVille.php?id=" . $item['villID'] . "\">Modifier</a>
-                    <a class=\"btn btn-sm btn-dark rounded py-2 px-4\" href=\"../pages/deleteVille.php?id=" . $item['villID'] . "\">Supprimer</a>
+                    <a class=\"btn btn-sm btn-dark rounded py-2 px-4\" href=\"../controller/SupprimerController.php?id=" . $item['villID'] . "\">Supprimer</a>
                 </div>
             </div>
         </div>
     </div>
 ";
-}
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-
-    $AddVille = new VilleController();
-    $response = $AddVille->AjouterVille($_POST['nom'], $_POST['vill_descreption'], $_POST['type'], $_POST['image'], $_POST['paysID']);
-    var_dump($response);
 }
