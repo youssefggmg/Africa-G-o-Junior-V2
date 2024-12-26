@@ -37,5 +37,13 @@ class Pays
         $stmt->execute();
         return $stmt->rowCount();
     }
+
+    public function getSinglePays($id)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM pays JOIN continent on pays.continentID = continent.continent_id WHERE paysId = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }
 

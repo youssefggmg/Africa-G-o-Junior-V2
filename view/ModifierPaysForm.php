@@ -1,11 +1,11 @@
 <?php
+require_once '../controller/GetSinglePaysController.php';
 
-require_once '../controller/GetSingleVilleController.php';
+$paysController = new GetSinglePaysController();
 
-$villeController = new GetSingleVilleController();
-$ville = $villeController->getSingleVille($_GET['id']);
-
-// print_r($ville);
+if (isset($_GET['id'])) {
+    $pays = $paysController->getSinglePays($_GET['id']);
+}
 
 ?>
 
@@ -64,7 +64,6 @@ $ville = $villeController->getSingleVille($_GET['id']);
                             <div class="navbar-nav py-0">
                                 <a href="../index.php" class="nav-item nav-link active">Villes</a>
                                 <a href="./listPays.php" class="nav-item nav-link active">Pays</a>
-                                <a href="./listPays.php" class="nav-item nav-link active">Continent</a>
                                 <a href="./statistiques.php" class="nav-item nav-link active">statistiques</a>
                             </div>
                         </div>
@@ -86,46 +85,52 @@ $ville = $villeController->getSingleVille($_GET['id']);
                 <div class="container">
                     <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
                         <h6 class="section-title text-center text-primary text-uppercase">Modifier</h6>
-                        <h1 class="mb-5"><span class="text-primary text-uppercase mx-1">L'</span>Ville</h1>
+                        <h1 class="mb-5"><span class="text-primary text-uppercase mx-1">L'</span>Pays</h1>
                     </div>
-                    <form action="../controller/ModifierVille.php" method="POST" class="wow fadeInUp"
+                    <form action="../controller/AjouterPaysController.php" method="POST" class="wow fadeInUp"
                         data-wow-delay="0.2s">
-                        <input type="text" name="id" hidden value="<?= $ville['villID'] ?>" class="form-control">
                         <div class="row g-3">
                             <div class="col-md-6">
-                                <input type="text" name="nom" value="<?= $ville['name'] ?>" class="form-control"
-                                    placeholder="Nom de la Ville" required>
+                                <input type="text" value="<?= $pays['paysName'] ?>" name="pays_nom" class="form-control"
+                                    placeholder="Nom du Pays" required>
                             </div>
                             <div class="col-md-6">
-                                <select name="paysID" class="form-select" id="pays">
-                                    <option value="" disabled>Pays</option>
-                                    <option value="1" selected><?= $ville['paysName'] ?></option>
-                                </select>
+                                <input type="number" value="<?= $pays['population_Number'] ?>" name="pays_population"
+                                    class="form-control" placeholder="Population" required>
                             </div>
-                            <div class="col-12">
-                                <select name="type" class="form-select" required>
-                                    <option value="" disabled selected>Type</option>
-                                    <?php if ($ville['type'] == 'capital'): ?>
-                                        <option value="othere">Town</option>
-                                        <option value="capital" selected>capital</option>
+                            <div class="col-md-12">
+                                <select name="pays_continent" class="form-select" required>
+                                    <option value="" disabled selected>Continent</option>
+                                    <?php if ($pays['continent_id'] == 1): ?>
+                                        <option value="1" selected>Africa</option>
+                                        <option value="2">Europe</option>
                                     <?php else: ?>
-                                        <option value="othere" selected>Town</option>
-                                        <option value="capital">capital</option>
+                                        <option value="1">Africa</option>
+                                        <option value="2" selected>Europe</option>
                                     <?php endif; ?>
-
                                 </select>
                             </div>
                             <div class="col-12">
-                                <textarea name="vill_descreption" class="form-control"
-                                    placeholder="Description de la Ville"
-                                    style="height: 100px;"><?= $ville['vill_descreption'] ?></textarea>
+                                <select name="pays_langues" class="form-select" required>
+                                    <option value="" disabled selected>Langues</option>
+                                    <option value="français" <?= $pays['language'] == 'français' ? 'selected' : '' ?>>
+                                        Français</option>
+                                    <option value="anglais" <?php if ($pays['language'] == 'anglais')
+                                        echo 'selected' ?>>Anglais</option>
+                                        <option value="espagnol" <?php if ($pays['language'] == 'espagnol')
+                                        echo 'selected' ?>>Espagnol</option>
+                                        <option value="allemand" <?php $pays['language'] == 'allemand' ? 'selected' : '' ?>>
+                                        Allemand</option>
+                                    <option value="Arabe" <?php $pays['language'] == 'Arabe' ? 'selected' : '' ?>>Arabe
+                                    </option>
+                                </select>
                             </div>
                             <div class="col-12">
-                                <input type="text" value="<?= $ville['image'] ?>" name="image" class="form-control"
-                                    placeholder="Url de la Ville">
+                                <input type="text" value="<?= $pays['image'] ?>" name="image" class="form-control"
+                                    placeholder="Url de pays">
                             </div>
                             <div class="col-12 text-center">
-                                <button type="submit" class="btn btn-primary rounded py-2 px-5">Modifier</button>
+                                <button type="submit" class="btn btn-primary rounded py-2 px-5">Ajouter</button>
                             </div>
                         </div>
                     </form>
