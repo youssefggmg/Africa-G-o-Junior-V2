@@ -19,4 +19,13 @@ class Ville
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function AjouterVille($nom, $vill_descreption, $type, $image, $paysID)
+    {
+        $stmt = $this->db->prepare("INSERT INTO ville (name, vill_descreption, type, image, paysID) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssi", $nom, $vill_descreption, $type, $image, $paysID);
+        $stmt->execute();
+        return $stmt->affected_rows;
+
+    }
 }

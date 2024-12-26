@@ -19,6 +19,11 @@ class VilleController
     {
         return $this->villeModel->AfficherVilles();
     }
+
+    public function AjouterVille($nom, $vill_descreption, $type, $image, $paysID)
+    {
+        return $this->villeModel->AjouterVille($nom, $vill_descreption, $type, $image, $paysID);
+    }
 }
 
 function dispayData($item)
