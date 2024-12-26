@@ -67,7 +67,7 @@ $villes = $villeController->afficherVilles();
                     </nav>
                 </div>
                 <div class="col-md-3 d-flex align-items-center justify-content-end">
-                    <a href="/index.php" class="btn btn-primary rounded-lg py-2  px-md-5 d-none d-lg-block">se connecter
+                    <a href="/index.php" class="btn btn-primary rounded-lg py-1  px-md-3 d-none d-lg-block">se connecter
                         <i class="fa fa-arrow-right ms-3"></i>
                     </a>
                 </div>
@@ -84,8 +84,12 @@ $villes = $villeController->afficherVilles();
                                 class="text-primary text-uppercase mx-1">Villes</span></h2>
                     </div>
                     <div class="text-end">
-                        <a href="./pages/paysForm.php" class="btn btn-primary rounded py-2 px-4">Ajouter une nouvelle
+                        <a href="./view/AjoutePaysForm.php" class="btn text-white bg-dark rounded py-2 px-2">Ajouter
+                            une
+                            nouvelle
                             Pays</a>
+                        <a href="./view/AjouterVilleForm.php" class="btn btn-primary rounded py-2 px-2">Ajouter
+                            unVille</a>
                     </div>
 
                 </div>
@@ -111,17 +115,6 @@ $villes = $villeController->afficherVilles();
                     }
 
                     ?>
-
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="room-item shadow rounded overflow-hidden ">
-
-                            <div class="p-4 mt-2 d-flex justify-content-center">
-                                <a href="./view/AjouterVilleForm.php">
-                                    <button class="btn btn-sm btn-primary rounded py-2 px-4">Ajouter un
-                                        Ville</button></a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

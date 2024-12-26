@@ -17,4 +17,17 @@ class Pays
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function AjouterPays($nom, $population, $continent, $language, $image)
+    {
+        $stmt = $this->db->prepare("INSERT INTO pays (paysName,population_Number,language,image,continentID) VALUES (:nom, :population, :language, :image, :continent)");
+        $stmt->bindParam(':nom', $nom);
+        $stmt->bindParam(':population', $population);
+        $stmt->bindParam(':continent', $continent);
+        $stmt->bindParam(':language', $language);
+        $stmt->bindParam(':image', $image);
+        $stmt->execute();
+        return $stmt->rowCount();
+    }
 }
+

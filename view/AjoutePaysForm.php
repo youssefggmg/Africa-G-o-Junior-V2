@@ -1,21 +1,9 @@
-<?php
-
-require_once '../controller/ListPaysController.php';
-
-$listpaysController = new ListPaysController();
-$pays = $listpaysController->AfficherToutPays();
-
-
-
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <title>Africa Géo-Junior</title>
+    <title>Africa Géo-Junior - Ajouter</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -56,23 +44,22 @@ $pays = $listpaysController->AfficherToutPays();
                 </div>
                 <div class="col-md-6">
                     <nav class="navbar navbar-expand-lg bg-dark navbar-dark p-3 p-lg-0">
-
-                        <div class="navbar-collapse justify-content-center" id="navbarCollapse">
-                            <div class="navbar-nav py-0" id="navbarCollapseNav">
+                        <button type="button" class="navbar-toggler" data-bs-toggle="collapse"
+                            data-bs-target="#navbarCollapse">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse justify-content-center" id="navbarCollapse">
+                            <div class="navbar-nav py-0">
                                 <a href="../index.php" class="nav-item nav-link active">Villes</a>
                                 <a href="./listPays.php" class="nav-item nav-link active">Pays</a>
                                 <a href="./statistiques.php" class="nav-item nav-link active">statistiques</a>
                             </div>
-                            <button type="button" class="navbar-toggler" id="togglecollapse"
-                                data-bs-target="#navbarCollapse">
-                                <span class="navbar-toggler-icon"></span>
-                            </button>
                         </div>
                     </nav>
                 </div>
                 <div class="col-md-3 d-flex align-items-center justify-content-end">
-                    <a href="https://htmlcodex.com/hotel-html-template-pro" id="login"
-                        class="btn btn-primary rounded-lg py-2  px-md-5 d-none d-lg-block">se connecter
+                    <a href="https://htmlcodex.com/hotel-html-template-pro"
+                        class="btn btn-primary rounded-lg py-2  px-md-5 d-none d-lg-block">LOGIN
                         <i class="fa fa-arrow-right ms-3"></i>
                     </a>
                 </div>
@@ -81,65 +68,57 @@ $pays = $listpaysController->AfficherToutPays();
         <!-- Header End -->
 
         <!-- Room Start -->
-        <div class="container">
-            <div class="d-flex justify-content-between align-items-center wow fadeInUp my-5" data-wow-delay="0.1s">
-                <div class="text-center">
-                    <h2 class=""><span class="text-primary text-uppercase mx-1">Liste
-                            des</span>Villes
-                    </h2>
-                </div>
-                <div class="text-end">
-                    <a href="./AjoutePaysForm.php" class="btn btn-primary rounded py-2 px-4">Ajouter une nouvelle
-                        Pays</a>
-                </div>
-
-            </div>
-
-            <div class="row g-4">
-                <?php
-
-                foreach ($pays as $item) {
-                    ?>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="room-item shadow rounded overflow-hidden">
-                            <div class="position-relative">
-                                <!-- Image du pays -->
-                                <img src="<?= $item['image'] ?>" alt="<?= $item['paysName'] ?>" class="img-fluid w-100"
-                                    style="height: 140px; object-fit: cover;">
-
+        <div class="container-xxl py-5">
+            <div class="container-xxl py-5">
+                <div class="container">
+                    <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                        <h6 class="section-title text-center text-primary text-uppercase">Ajouter un Pays</h6>
+                        <h1 class="mb-5"><span class="text-primary text-uppercase mx-1">Nouveau</span>Pays</h1>
+                    </div>
+                    <form action="../controller/AjouterPaysController.php" method="POST" class="wow fadeInUp"
+                        data-wow-delay="0.2s">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <input type="text" name="pays_nom" class="form-control" placeholder="Nom du Pays"
+                                    required>
                             </div>
-                            <div class="p-4 mt-2">
-                                <div class="d-flex justify-content-between">
-                                    <p class="mb-0"><i
-                                            class="fa fa-map-marker-alt text-primary me-2"></i><?= $item['paysName'] ?></p>
-                                    <p class="mb-0"><i
-                                            class="fa fa-users text-primary me-2"></i><?= number_format($item['population_Number']) ?>
-                                    </p>
-                                </div>
-                                <div class="mt-2 d-flex justify-content-between">
-                                    <p class="mb-0"><i class="fa fa-language text-primary me-2"></i><?= $item['language'] ?>
-                                    </p>
-                                    <a href="./deletePays.php?id=<?= $item['paysId'] ?>"
-                                        class="btn btn-sm rounded-pill px-3">
-                                        <i class="fa fa-trash me-1"></i>
-                                    </a>
-                                </div>
+                            <div class="col-md-6">
+                                <input type="number" name="pays_population" class="form-control"
+                                    placeholder="Population" required>
+                            </div>
+                            <div class="col-md-12">
+                                <select name="pays_continent" class="form-select" required>
+                                    <option value="" disabled selected>Continent</option>
+                                    <option value="1">Africa</option>
+                                    <option value="2">Europe</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <select name="pays_langues" class="form-select" required>
+                                    <option value="" disabled selected>Langues</option>
+                                    <option value="français">Français</option>
+                                    <option value="anglais">Anglais</option>
+                                    <option value="espagnol">Espagnol</option>
+                                    <option value="allemand">Allemand</option>
+                                    <option value="Arabe">Arabe</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <input type="text" name="image" class="form-control" placeholder="Url de pays">
+                            </div>
+                            <div class="col-12 text-center">
+                                <button type="submit" class="btn btn-primary rounded py-2 px-5">Ajouter</button>
                             </div>
                         </div>
-                    </div>
-
-                    <?php
-                }
-
-                ?>
-
+                    </form>
+                </div>
             </div>
         </div>
         <!-- Room End -->
 
 
         <!-- Footer Start -->
-        <footer class="bg-dark py-3 mt-5">
+        <footer class="bg-dark py-3">
             <div class="container">
                 <div class="copyright">
                     <div class="row">
@@ -162,7 +141,7 @@ $pays = $listpaysController->AfficherToutPays();
         <!-- Footer End -->
     </div>
 
-    <script src="../assets/js/main.js"></script>
+    <script src="assets/js/main.js"></script>
 </body>
 
 </html>
