@@ -1,6 +1,6 @@
 function filterBy(filter) {
 
-    let towns = document.querySelectorAll('.town');
+    let towns = document.querySelectorAll('.othere');
     let capital = document.querySelectorAll('.capital');
 
     if (filter === 'capital') {

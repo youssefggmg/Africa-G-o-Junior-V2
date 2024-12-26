@@ -20,8 +20,7 @@ class ModifierVille
 
 
 }
-
-// logic pour ajouter une ville : instance de la class AjouterVilleController et appel de la methode
+// logic pour modifier un ville
 
 
 if (isset($_POST['id'])) {
