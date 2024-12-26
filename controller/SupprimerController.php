@@ -22,6 +22,8 @@ class SupprimerController
 
 // Logic pour supprimer une ville : instance de la class SupprimerController et appel de la methode
 
+
+
 if (isset($_GET['id'])) {
 
     $id = $_GET['id'];

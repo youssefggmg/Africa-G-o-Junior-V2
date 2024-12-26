@@ -88,8 +88,9 @@ $ville = $villeController->getSingleVille($_GET['id']);
                         <h6 class="section-title text-center text-primary text-uppercase">Ajouter une Ville</h6>
                         <h1 class="mb-5"><span class="text-primary text-uppercase mx-1">Nouvelle</span>Ville</h1>
                     </div>
-                    <form action="../controller/AjoutVilleController.php" method="POST" class="wow fadeInUp"
+                    <form action="../controller/ModifierVille.php" method="POST" class="wow fadeInUp"
                         data-wow-delay="0.2s">
+                        <input type="text" name="id" hidden value="<?= $ville['villID'] ?>" class="form-control">
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <input type="text" name="nom" value="<?= $ville['name'] ?>" class="form-control"
@@ -105,11 +106,9 @@ $ville = $villeController->getSingleVille($_GET['id']);
                                 <select name="type" class="form-select" required>
                                     <option value="" disabled selected>Type</option>
                                     <?php if ($ville['type'] == 'capital'): ?>
-                                        <option value="" disabled>Type</option>
                                         <option value="othere">Town</option>
                                         <option value="capital" selected>capital</option>
                                     <?php else: ?>
-                                        <option value="" disabled>Type</option>
                                         <option value="othere" selected>Town</option>
                                         <option value="capital">capital</option>
                                     <?php endif; ?>
@@ -126,7 +125,7 @@ $ville = $villeController->getSingleVille($_GET['id']);
                                     placeholder="Url de la Ville">
                             </div>
                             <div class="col-12 text-center">
-                                <button type="submit" class="btn btn-primary rounded py-2 px-5">Ajouter</button>
+                                <button type="submit" class="btn btn-primary rounded py-2 px-5">Modifier</button>
                             </div>
                         </div>
                     </form>

@@ -15,7 +15,7 @@ class Ville
 
     public function AfficherVilles()
     {
-        $stmt = $this->db->prepare("SELECT * FROM ville JOIN pays ON ville.payID = pays.paysId");
+        $stmt = $this->db->prepare("SELECT *, ville.image as imgVille FROM ville JOIN pays ON ville.payID = pays.paysId");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -47,5 +47,18 @@ class Ville
         $stmt->bindParam(':id', $id);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function ModifierVille($nom, $vill_descreption, $type, $image, $paysID, $id)
+    {
+        $stmt = $this->db->prepare("UPDATE ville SET name = :nom, vill_descreption = :vill_descreption, type = :type, image = :image, payID = :paysID WHERE villID = :id");
+        $stmt->bindParam(':nom', $nom);
+        $stmt->bindParam(':vill_descreption', $vill_descreption);
+        $stmt->bindParam(':type', $type);
+        $stmt->bindParam(':image', $image);
+        $stmt->bindParam(':paysID', $paysID);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->rowCount();
     }
 }
