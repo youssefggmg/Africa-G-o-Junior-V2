@@ -1,6 +1,6 @@
 <?php
 include "Database.php";
-class Auth extends Database
+class constraint extends Database
 {
     private $dbcon;
     private $constraintName;
