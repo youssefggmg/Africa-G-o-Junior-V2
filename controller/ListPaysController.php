@@ -18,4 +18,9 @@ class ListPaysController
         return $this->paysModel->AfficherPays();
     }
 
+    public function getSinglePaysVilles($id)
+    {
+        return $this->paysModel->AfficherPaysById($id);
+    }
+
 }

@@ -2,11 +2,19 @@
 session_start();
 require_once '../controller/ListPaysController.php';
 
-$listpaysController = new ListPaysController();
-$pays = $listpaysController->AfficherToutPays();
+if (isset($_GET['id'])) {
+    $id_pays = $_GET['id'];
 
+    $listpaysController = new ListPaysController();
+    $paysVilles = $listpaysController->getSinglePaysVilles($id_pays);
 
+    // foreach ($paysVilles as $item) {
+    //     echo "<li>" . $item['name'] . " - Population: " . number_format($item['population_Number']) . "</li>";
 
+    // }
+}
+
+// print_r($paysVilles);
 ?>
 
 
@@ -108,86 +116,64 @@ $pays = $listpaysController->AfficherToutPays();
 
             </div>
 
-            <div class="row g-4">
-                <?php
+            <!-- Room Start -->
+            <?php if (isset($paysVilles) && !empty($paysVilles)): ?>
+                <div class="my-5 p-4 border rounded bg-light">
+                    <h3 class="text-primary">Pays: <?= htmlspecialchars($paysVilles[0]['paysName']) ?></h3>
 
-                foreach ($pays as $item) {
-                    ?>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="room-item shadow rounded overflow-hidden">
-                            <div class="position-relative">
-                                <!-- Image du pays -->
-                                <img src="<?= $item['image'] ?>" alt="<?= $item['paysName'] ?>" class="img-fluid w-100"
-                                    style="height: 140px; object-fit: cover;">
+                    <?php if (count($paysVilles) > 1): ?>
+                        <ul class="list-group mt-3">
+                            <?php foreach ($paysVilles as $ville): ?>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span>
+                                        <strong><?= htmlspecialchars($ville['name']) ?></strong><br>
+                                        <?= htmlspecialchars($ville['vill_descreption']) ?>
+                                    </span>
+                                    <span class="badge bg-secondary">
+                                        Population: <?= number_format($ville['population_Number']) ?>
+                                    </span>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    <?php else: ?>
+                        <p class="text-warning mt-3">Aucune ville disponible pour ce pays.</p>
+                    <?php endif; ?>
+                </div>
+            <?php else: ?>
+                <div class="alert alert-warning mt-5">
+                    Informations sur le pays non disponibles.
+                </div>
+            <?php endif; ?>
 
+
+            <!-- Room End -->
+
+
+            <!-- Footer Start -->
+            <footer class="bg-dark py-3 mt-5">
+                <div class="container">
+                    <div class="copyright">
+                        <div class="row">
+                            <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                                &copy; <a class="border-bottom" href="#">Africa Géo-Junior.
+                                </a>, All Right Reserved Designed By <a class="border-bottom"
+                                    href="https://htmlcodex.com">CodeChogun</a>
                             </div>
-                            <div class="p-4 mt-2">
-                                <div class="d-flex justify-content-between">
-                                    <a href="./Pays_villesList.php?id=<?= $item['paysId'] ?>">
-                                        <p class="mb-0"><i
-                                                class="fa fa-map-marker-alt text-primary me-2"></i><?= $item['paysName'] ?>
-                                        </p>
-                                    </a>
-                                    <p class="mb-0"><i
-                                            class="fa fa-users text-primary me-2"></i><?= number_format($item['population_Number']) ?>
-                                    </p>
+                            <div class="col-md-6 text-center text-md-end">
+                                <div class="footer-menu">
+                                    <a href="../index.php">Ville</a>
+                                    <a href="./listPays.php">Pays</a>
+                                    <a href="./statistiques.php">Statistiques</a>
                                 </div>
-                                <div class="mt-2 d-flex justify-content-between">
-                                    <p class="mb-0"><i class="fa fa-language text-primary me-2"></i><?= $item['language'] ?>
-                                    </p>
-                                    <div>
-                                        <?php if (isset($_SESSION["UserRole"]) && $_SESSION["UserRole"] == 1): ?>
-                                            <a href="../controller/SupprimerPaysController.php?id=<?= $item['paysId'] ?>"
-                                                class="btn btn-sm rounded-pill px-3">
-                                                <i class="fas fa-trash-alt me-1"></i>
-                                            </a> <a href="../view/ModifierPaysForm.php?id=<?= $item['paysId'] ?>"
-                                                class="btn btn-sm rounded-pill px-3">
-                                                <i class="fas fa-edit me-1"></i>
-                                            </a>
-                                        <?php else: ?>
-                                            <span></span>
-                                        <?php endif; ?>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <?php
-                }
-
-                ?>
-
-            </div>
-        </div>
-        <!-- Room End -->
-
-
-        <!-- Footer Start -->
-        <footer class="bg-dark py-3 mt-5">
-            <div class="container">
-                <div class="copyright">
-                    <div class="row">
-                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                            &copy; <a class="border-bottom" href="#">Africa Géo-Junior.
-                            </a>, All Right Reserved Designed By <a class="border-bottom"
-                                href="https://htmlcodex.com">CodeChogun</a>
-                        </div>
-                        <div class="col-md-6 text-center text-md-end">
-                            <div class="footer-menu">
-                                <a href="../index.php">Ville</a>
-                                <a href="./listPays.php">Pays</a>
-                                <a href="./statistiques.php">Statistiques</a>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </footer>
-        <!-- Footer End -->
-    </div>
+            </footer>
+            <!-- Footer End -->
+        </div>
 
-    <script src="../assets/js/main.js"></script>
+        <script src="../assets/js/main.js"></script>
 </body>
 
 </html>

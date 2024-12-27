@@ -18,6 +18,14 @@ class Pays
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function AfficherPaysById($id)
+    {
+        $stmt = $this->db->prepare("SELECT *, pays.image as paysImage, ville.image as villeImage FROM pays Join ville on pays.paysId = ville.payID WHERE paysId = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function AjouterPays($nom, $population, $continent, $language, $image)
     {
         $stmt = $this->db->prepare("INSERT INTO pays (paysName,population_Number,language,image,continentID) VALUES (:nom, :population, :language, :image, :continent)");

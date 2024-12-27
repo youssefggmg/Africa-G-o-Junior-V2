@@ -48,10 +48,14 @@ function dispayData($item)
                     </div>
                     <p class=\"text-body mb-3\">" . $item['paysName'] . "</p>
                     <p class=\"text-body mb-3\">" . $description . "</p>
-                    <div class=\"d-flex justify-content-between\">
+                    " .
+        (
+            (isset($_SESSION["UserRole"]) && $_SESSION["UserRole"] == 1) ?
+            "<div class=\"d-flex justify-content-between\">
                         <a class=\"btn btn-sm btn-primary rounded py-2 px-4\" href=\"../view/ModifierVilleForm.php?id=" . $item['villID'] . "\">Modifier</a>
                         <a class=\"btn btn-sm btn-dark rounded py-2 px-4\" href=\"../controller/SupprimerController.php?id=" . $item['villID'] . "\">Supprimer</a>
-                    </div>
+                    </div>" : "<div></div>"
+        ) . "
                 </div>
             </div>
         </div>
