@@ -3,13 +3,13 @@ session_start();
 include "../classes/auth.php";
 $signin = new Auth();
 $Result = $signin->login();
-if ($Result["status"]==1) {
-    // location to be added later 
+if ($Result["status"] == 1) {
+
     $_SESSION["UserRole"] = $Result["role"];
-    echo "rweiutgobvbtuoncabys dfacufbyeq";
-    // header("location: ");
-}
-elseif ($Result["status"]==0) {
-    header("location: ../view/signin". urldecode($Result["message"]));
+    $_SESSION["UserName"] = $Result["name"];
+    header("location: ../index.php");
+
+} elseif ($Result["status"] == 0) {
+    header("location: ../view/signin" . urldecode($Result["message"]));
 }
 ?>
