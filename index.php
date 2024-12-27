@@ -1,10 +1,10 @@
 <?php
 
+session_start();
 require_once './controller/VilleController.php';
 
 $villeController = new VilleController();
 $villes = $villeController->afficherVilles();
-
 ?>
 
 <!DOCTYPE html>
@@ -67,9 +67,17 @@ $villes = $villeController->afficherVilles();
                     </nav>
                 </div>
                 <div class="col-md-3 d-flex align-items-center justify-content-end">
-                    <a href="/index.php" class="btn btn-primary rounded-lg py-1  px-md-3 d-none d-lg-block">se connecter
-                        <i class="fa fa-arrow-right ms-3"></i>
-                    </a>
+                    <?php if (isset($_SESSION["UserName"])): ?>
+                        <a href="./controller/LogoutController.php"
+                            class="btn btn-primary rounded-lg py-1  px-md-3 d-none d-lg-block">
+                            <i class="fa fa-user me-2"></i> <?= $_SESSION["UserName"] ?>
+                        </a>
+                    <?php else: ?>
+                        <a href="./view/signin.php" class="btn btn-primary rounded-lg py-1  px-md-3 d-none d-lg-block">se
+                            connecter
+                            <i class="fa fa-arrow-right ms-3"></i>
+                        </a>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
@@ -83,15 +91,19 @@ $villes = $villeController->afficherVilles();
                         <h2 class=""><span class="text-primary text-uppercase mx-1">Africa'</span>S<span
                                 class="text-primary text-uppercase mx-1">Villes</span></h2>
                     </div>
-                    <div class="text-end">
-                        <a href="./view/AjoutePaysForm.php" class="btn text-white bg-dark rounded py-2 px-2">Ajouter
-                            une
-                            nouvelle
-                            Pays</a>
-                        <a href="./view/AjouterVilleForm.php" class="btn btn-primary rounded py-2 px-2">Ajouter
-                            unVille</a>
-                    </div>
+                    <?php if (isset($_SESSION["UserRole"]) == 1): ?>
+                        <div class="text-end">
+                            <a href="./view/AjoutePaysForm.php" class="btn text-white bg-dark rounded py-2 px-2">Ajouter
+                                une
+                                nouvelle
+                                Pays</a>
+                            <a href="./view/AjouterVilleForm.php" class="btn btn-primary rounded py-2 px-2">Ajouter
+                                unVille</a>
+                        </div>
+                    <?php else: ?>
 
+                        <div></div>
+                    <?php endif; ?>
                 </div>
 
                 <div class="d-flex justify-content-between align-items-center mb-4">
