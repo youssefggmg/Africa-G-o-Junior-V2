@@ -58,7 +58,6 @@ $villes = $villeController->afficherVilles();
                                 <a href="/index.php" class="nav-item nav-link active">Villes</a>
                                 <a href="./view/ListPays.php" class="nav-item nav-link active">Pays</a>
                                 <a href="./pages/listPays.php" class="nav-item nav-link active">Continents</a>
-                                <a href="./pages/statistiques.php" class="nav-item nav-link active">statistiques</a>
                             </div>
                         </div>
                         <button type="button" class="navbar-toggler" id="togglecollapse">
@@ -91,7 +90,7 @@ $villes = $villeController->afficherVilles();
                         <h2 class=""><span class="text-primary text-uppercase mx-1">Africa'</span>S<span
                                 class="text-primary text-uppercase mx-1">Villes</span></h2>
                     </div>
-                    <?php if (isset($_SESSION["UserRole"]) == 1): ?>
+                    <?php if (isset($_SESSION["UserRole"]) && $_SESSION["UserRole"] == 1): ?>
                         <div class="text-end">
                             <a href="./view/AjoutePaysForm.php" class="btn text-white bg-dark rounded py-2 px-2">Ajouter
                                 une

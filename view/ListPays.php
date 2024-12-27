@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once '../controller/ListPaysController.php';
 
 $listpaysController = new ListPaysController();
@@ -61,7 +61,7 @@ $pays = $listpaysController->AfficherToutPays();
                             <div class="navbar-nav py-0" id="navbarCollapseNav">
                                 <a href="../index.php" class="nav-item nav-link active">Villes</a>
                                 <a href="./listPays.php" class="nav-item nav-link active">Pays</a>
-                                <a href="./statistiques.php" class="nav-item nav-link active">statistiques</a>
+                                <a href="./listPays.php" class="nav-item nav-link active">Continents</a>
                             </div>
                             <button type="button" class="navbar-toggler" id="togglecollapse"
                                 data-bs-target="#navbarCollapse">
@@ -71,10 +71,17 @@ $pays = $listpaysController->AfficherToutPays();
                     </nav>
                 </div>
                 <div class="col-md-3 d-flex align-items-center justify-content-end">
-                    <a href="https://htmlcodex.com/hotel-html-template-pro" id="login"
-                        class="btn btn-primary rounded-lg py-2  px-md-5 d-none d-lg-block">se connecter
-                        <i class="fa fa-arrow-right ms-3"></i>
-                    </a>
+                    <?php if (isset($_SESSION["UserName"])): ?>
+                        <a href="../controller/LogoutController.php"
+                            class="btn btn-primary rounded-lg py-1  px-md-3 d-none d-lg-block">
+                            <i class="fa fa-user me-2"></i> <?= $_SESSION["UserName"] ?>
+                        </a>
+                    <?php else: ?>
+                        <a href="../view/signin.php" class="btn btn-primary rounded-lg py-1  px-md-3 d-none d-lg-block">se
+                            connecter
+                            <i class="fa fa-arrow-right ms-3"></i>
+                        </a>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
@@ -85,12 +92,18 @@ $pays = $listpaysController->AfficherToutPays();
             <div class="d-flex justify-content-between align-items-center wow fadeInUp my-5" data-wow-delay="0.1s">
                 <div class="text-center">
                     <h2 class=""><span class="text-primary text-uppercase mx-1">Liste
-                            des</span>Villes
+                            des</span>Pays
                     </h2>
                 </div>
                 <div class="text-end">
-                    <a href="./AjoutePaysForm.php" class="btn btn-primary rounded py-2 px-4">Ajouter une nouvelle
-                        Pays</a>
+                    <?php if (isset($_SESSION["UserRole"]) && $_SESSION["UserRole"] == 1): ?>
+                        <a href="./AjoutePaysForm.php" class="btn btn-primary rounded py-2 px-4">Ajouter une nouvelle
+                            Pays</a>
+                    <?php else: ?>
+                        <span></span>
+
+                    <?php endif; ?>
+
                 </div>
 
             </div>
@@ -120,13 +133,17 @@ $pays = $listpaysController->AfficherToutPays();
                                     <p class="mb-0"><i class="fa fa-language text-primary me-2"></i><?= $item['language'] ?>
                                     </p>
                                     <div>
-                                        <a href="../controller/SupprimerPaysController.php?id=<?= $item['paysId'] ?>"
-                                            class="btn btn-sm rounded-pill px-3">
-                                            <i class="fas fa-trash-alt me-1"></i>
-                                        </a> <a href="../view/ModifierPaysForm.php?id=<?= $item['paysId'] ?>"
-                                            class="btn btn-sm rounded-pill px-3">
-                                            <i class="fas fa-edit me-1"></i>
-                                        </a>
+                                        <?php if (isset($_SESSION["UserRole"]) && $_SESSION["UserRole"] == 1): ?>
+                                            <a href="../controller/SupprimerPaysController.php?id=<?= $item['paysId'] ?>"
+                                                class="btn btn-sm rounded-pill px-3">
+                                                <i class="fas fa-trash-alt me-1"></i>
+                                            </a> <a href="../view/ModifierPaysForm.php?id=<?= $item['paysId'] ?>"
+                                                class="btn btn-sm rounded-pill px-3">
+                                                <i class="fas fa-edit me-1"></i>
+                                            </a>
+                                        <?php else: ?>
+                                            <span></span>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
