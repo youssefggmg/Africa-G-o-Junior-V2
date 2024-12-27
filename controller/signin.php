@@ -10,6 +10,6 @@ if ($Result["status"] == 1) {
     header("location: ../index.php");
 
 } elseif ($Result["status"] == 0) {
-    header("location: ../view/signin" . urldecode($Result["message"]));
+    header("location: ../view/signin.php" . urldecode($Result["message"]));
 }
 ?>
