@@ -55,7 +55,7 @@ $villes = $villeController->afficherVilles();
                     <nav class="navbar navbar-expand-lg bg-dark navbar-dark p-3 p-lg-0">
                         <div class="navbar-collapse justify-content-center" id="navbarCollapse">
                             <div class="navbar-nav py-0" id="navbarCollapseNav">
-                                <a href="/index.php" class="nav-item nav-link active">Villes</a>
+                                <a href="./index.php" class="nav-item nav-link active">Villes</a>
                                 <a href="./view/ListPays.php" class="nav-item nav-link active">Pays</a>
                                 <a href="./pages/listPays.php" class="nav-item nav-link active">Continents</a>
                             </div>
