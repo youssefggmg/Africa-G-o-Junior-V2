@@ -73,9 +73,9 @@ class constraint extends Database
 
         try {
             $stmt = $this->dbcon->prepare($query);
-            $stmt->execute($params);
+            $modified= $stmt->execute($params);
 
-            if ($stmt->rowCount() > 0) {
+            if ($modified) {
                 return ["status" => 1, "message" => "Continent updated successfully."];
             } else {
                 return ["status" => 0, "error" => "No changes made or invalid ID."];
@@ -86,7 +86,7 @@ class constraint extends Database
     }
     public function deletecountinant()
     {
-        $this->continentID = $_POST["CID"];
+        $this->continentID = $_GET["CID"];
         $query = "DELETE FROM continent WHERE continent_id = :id";
         try {
             $stmt = $this->dbcon->prepare($query);
@@ -102,10 +102,18 @@ class constraint extends Database
         try {
             $query = "SELECT * FROM continent";
             $stmt = $this->dbcon->query($query);
-            $Result = $stmt->fetchAll();
+            $Result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return ["status"=>1,"Result"=>$Result];
         } catch (PDOException $e) {
             return ["status" => 0, "error" => $e->getMessage()];
         }
+    }
+    public function getSinglecontinat ($id){
+        $query = "SELECT *  FROM continent where continent_id=:theID";
+        $stmt = $this->dbcon->prepare($query);
+        $stmt->bindParam(":theID",$id);
+        $stmt->execute();
+        $Result= $stmt->fetch();
+        return $Result;
     }
 }
