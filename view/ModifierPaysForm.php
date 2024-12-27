@@ -87,8 +87,10 @@ if (isset($_GET['id'])) {
                         <h6 class="section-title text-center text-primary text-uppercase">Modifier</h6>
                         <h1 class="mb-5"><span class="text-primary text-uppercase mx-1">L'</span>Pays</h1>
                     </div>
-                    <form action="../controller/AjouterPaysController.php" method="POST" class="wow fadeInUp"
+                    <form action="../controller/ModifierPays.php" method="POST" class="wow fadeInUp"
                         data-wow-delay="0.2s">
+                        <input type="text" hidden value="<?= $pays['paysId'] ?>" name="id_pays" class="form-control">
+
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <input type="text" value="<?= $pays['paysName'] ?>" name="pays_nom" class="form-control"
@@ -113,16 +115,36 @@ if (isset($_GET['id'])) {
                             <div class="col-12">
                                 <select name="pays_langues" class="form-select" required>
                                     <option value="" disabled selected>Langues</option>
-                                    <option value="français" <?= $pays['language'] == 'français' ? 'selected' : '' ?>>
-                                        Français</option>
-                                    <option value="anglais" <?php if ($pays['language'] == 'anglais')
-                                        echo 'selected' ?>>Anglais</option>
-                                        <option value="espagnol" <?php if ($pays['language'] == 'espagnol')
-                                        echo 'selected' ?>>Espagnol</option>
-                                        <option value="allemand" <?php $pays['language'] == 'allemand' ? 'selected' : '' ?>>
-                                        Allemand</option>
-                                    <option value="Arabe" <?php $pays['language'] == 'Arabe' ? 'selected' : '' ?>>Arabe
-                                    </option>
+                                    <?php if ($pays['language'] == 'français'): ?>
+                                        <option value="français" selected> Français</option>
+                                    <?php else: ?>
+                                        <option value="français"> Français</option>
+                                    <?php endif; ?>
+
+                                    <?php if ($pays['language'] == 'anglais'): ?>
+                                        <option value="anglais" selected>Anglais</option>
+                                    <?php else: ?>
+                                        <option value="anglais">Anglais</option>
+                                    <?php endif; ?>
+
+                                    <?php if ($pays['language'] == 'espagnol'): ?>
+                                        <option value="espagnol" selected> Espagnol</option>
+                                    <?php else: ?>
+                                        <option value="espagnol"> Espagnol</option>
+                                    <?php endif; ?>
+
+                                    <?php if ($pays['language'] == 'allemand'): ?>
+                                        <option value="allemand" selected> Allemand</option>
+                                    <?php else: ?>
+                                        <option value="allemand"> Allemand</option>
+                                    <?php endif; ?>
+
+                                    <?php if ($pays['language'] == 'Arabe'): ?>
+                                        <option value="Arabe" selected> Arabe</option>
+                                    <?php else: ?>
+                                        <option value="Arabe"> Arabe</option>
+                                    <?php endif; ?>
+
                                 </select>
                             </div>
                             <div class="col-12">
@@ -130,7 +152,7 @@ if (isset($_GET['id'])) {
                                     placeholder="Url de pays">
                             </div>
                             <div class="col-12 text-center">
-                                <button type="submit" class="btn btn-primary rounded py-2 px-5">Ajouter</button>
+                                <button type="submit" class="btn btn-primary rounded py-2 px-5">Modifier</button>
                             </div>
                         </div>
                     </form>

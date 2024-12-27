@@ -45,5 +45,18 @@ class Pays
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function modifierPays($id, $nom, $population, $continent, $language, $image)
+    {
+        $stmt = $this->db->prepare("UPDATE pays SET paysName = :nom, population_Number = :population, language = :language, image = :image, continentID = :continent WHERE paysId = :id");
+        $stmt->bindParam(':nom', $nom);
+        $stmt->bindParam(':population', $population);
+        $stmt->bindParam(':language', $language);
+        $stmt->bindParam(':image', $image);
+        $stmt->bindParam(':continent', $continent);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->rowCount();
+    }
 }
 
