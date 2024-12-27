@@ -125,7 +125,7 @@
                         <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
                             &copy; <a class="border-bottom" href="#">Africa Géo-Junior.
                             </a>, All Right Reserved Designed By <a class="border-bottom"
-                                href="https://htmlcodex.com">Rabeh Abderrahmane</a>
+                                href="https://htmlcodex.com">CodeChogun</a>
                         </div>
                         <div class="col-md-6 text-center text-md-end">
                             <div class="footer-menu">
