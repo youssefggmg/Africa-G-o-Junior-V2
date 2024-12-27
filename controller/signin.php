@@ -4,7 +4,6 @@ include "../classes/auth.php";
 $signin = new Auth();
 $Result = $signin->login();
 if ($Result["status"] == 1) {
-
     $_SESSION["UserRole"] = $Result["role"];
     $_SESSION["UserName"] = $Result["name"];
     header("location: ../index.php");
